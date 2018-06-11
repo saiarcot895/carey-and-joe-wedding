@@ -1,0 +1,55 @@
+html {
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+.container-fluid {
+	padding-top: 56px;
+}
+
+div#usContainer {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("atlanta.jpg") center center;
+}
+
+div#ourStoryContainer {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("atlanta.jpg") center center;
+}
+
+div#whenAndWhereContainer {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("seattle.jpg") center center;
+}
+
+div#registryContainer {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("amazon.jpg") center center;
+}
+
+div#rsvpContainer {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url("wedding.jpg") center center;
+}
+
+div#usContainer, div#ourStoryContainer, div#whenAndWhereContainer, div#registryContainer, div#rsvpContainer {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 50em;
+}
+
+div#usContainer > div {
+    margin: auto;
+}
+
+h2 {
+    padding-top: 56px;
+}
