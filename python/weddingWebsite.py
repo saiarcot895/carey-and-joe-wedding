@@ -13,6 +13,23 @@ def get_db():
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
         db.row_factory = sqlite3.Row
+        c = db.cursor()
+        c.execute(""" CREATE TABLE IF NOT EXISTS `GuestList` (
+            `FirstName`     TEXT NOT NULL,
+            `LastName`      TEXT NOT NULL,
+            `NumGuests`     INTEGER NOT NULL DEFAULT 0,
+            `Vegetarian`    INTEGER NOT NULL DEFAULT 0,
+            `PresentForDay1`        INTEGER NOT NULL DEFAULT 0,
+            `PresentForDay2`        INTEGER NOT NULL DEFAULT 0
+            );
+            """);
+        c.execute(""" CREATE UNIQUE INDEX IF NOT EXISTS `GuestNameIndex`
+            ON `GuestList` (
+            `FirstName`     ASC,
+            `LastName`      ASC
+            );
+            """);
+        c.close()
     return db
 
 def str2bool(s):
