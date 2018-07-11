@@ -5,7 +5,7 @@ $(function() {
         });
     });
 
-    $("#rsvpContainer form").submit(function(e) {
+    $("#nameLookupForm").submit(function(e) {
         // Prevent default functionality
         e.preventDefault();
 
@@ -17,13 +17,32 @@ $(function() {
             url: actionurl,
             type: "POST",
             dataType: "json",
-            data: $(this).find("input[name=firstName], input[name=lastName]").serialize(),
+            data: $("#nameLookupForm").find("input[name=firstName], input[name=lastName]").serialize(),
             jsonp: false,
             success: function(data) {
                 $("#numGuestsInput").attr("value", data["numGuests"]);
                 $("#attendingDay1Check").prop("checked", data["presentForDay1"]);
                 $("#attendingDay2Check").prop("checked", data["presentForDay2"]);
-                $("#rsvpContainer form fieldset:disabled").prop("disabled", false).slideDown();
+                $("#rsvpEditForm").prop("disabled", false).slideDown();
+            }
+        });
+    });
+
+    $("#rsvpEditForm").submit(function(e) {
+        // Prevent default functionality
+        e.preventDefault();
+
+        // Get the action URL of the form
+        var actionurl = $(this).find("button").prop("formAction");
+
+        // Do our own request and handle the results
+        $.ajax({
+            url: actionurl,
+            type: "POST",
+            dataType: "json",
+            data: $("#nameLookupForm, #rsvpEditForm").find("input[name=firstName], input[name=lastName], input[name=numGuests], input[name=presentForDay1], input[name=presentForDay2], input[name=vegetarian]").serialize(),
+            jsonp: false,
+            success: function(data) {
             }
         });
     });
