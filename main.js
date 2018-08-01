@@ -1,9 +1,20 @@
 $(function() {
-    $("a.nav-link").click(function() {
-        $("html, body").animate({
-            scrollTop: $($(this).attr("href")).offset().top - 56
+    $(document).ready(function() {
+        $(".container-fluid").load("home.html");
+    });
+
+    $("ul.navbar-nav li").each(function() {
+        $(this).on("click", function(){
+            $(".container-fluid").load($(this).attr("data-page")+".html");
         });
     });
+
+
+    //$("a.nav-link").click(function() {
+    //    $("html, body").animate({
+    //        scrollTop: $($(this).attr("href")).offset().top - 56
+    //    });
+    //});
 
     $("#nameLookupForm").submit(function(e) {
         // Prevent default functionality
