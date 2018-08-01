@@ -49,6 +49,7 @@ def get_guest_info():
         returnData["error"] = "Guest not found."
         response = Response(json.dumps(returnData), 404,
                 mimetype="application/json")
+        response.headers["Access-Control-Allow-Origin"] = "*"
         return response
     returnData["firstName"] = row["FirstName"]
     returnData["lastName"] = row["LastName"]
@@ -58,6 +59,7 @@ def get_guest_info():
     returnData["presentForDay2"] = bool(int(row["PresentForDay2"]))
     c.close()
     response = Response(json.dumps(returnData), mimetype="application/json")
+    response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 
 @app.route('/updateInfo', methods=["POST"])
@@ -77,6 +79,7 @@ def update_guest_info():
                 lastName))
     returnData = {}
     response = Response(json.dumps(returnData), mimetype="application/json")
+    response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 
 @app.teardown_appcontext
@@ -91,6 +94,7 @@ def invalid_request(error):
     returnData["error"] = "Invalid request."
     response = Response(json.dumps(returnData), 400,
             mimetype="application/json")
+    response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 
 if __name__ == '__main__':
