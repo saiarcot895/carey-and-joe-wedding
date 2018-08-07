@@ -1,0 +1,55 @@
+{% set currentPage = "rsvp" %}
+{% include "header.html" %}
+<div class="container-fluid">
+    <div class="row">
+        <div id="rsvpContainer" class="col">
+            <h2 id="rsvp" class="text-uppercase text-center">RSVP</h2>
+            <div class="container">
+                <form method="post" id="nameLookupForm">
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="text" class="form-control" name="firstName" placeholder="First name" required>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" name="lastName" placeholder="Last name" required>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" formaction="{{ url_for('get_guest_info') }}" class="btn btn-primary mb-2">Lookup Guest</button>
+                        </div>
+                    </div>
+                </form>
+                <form method="post" id="rsvpEditForm" disabled style="display: none;">
+                    <div class="form-group">
+                        <label for="numGuestsInput">Number of Guests</label>
+                        <input type="number" class="form-control" id="numGuestsInput" name="numGuests" min="0" max="2" value="0">
+                    </div>
+                    <fieldset>
+                        <legend>Attendance</legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="presentForDay1" value="1" id="attendingDay1Check">
+                            <label class="form-check-label" for="attendingDay1Check">Attending Day 1</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="presentForDay2" value="1" id="attendingDay2Check">
+                            <label class="form-check-label" for="attendingDay2Check">Attending Day 2</label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Vegetarian</legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="vegetarian" value="1" id="vegetarianYes">
+                            <label class="form-check-label" for="vegetarianYes">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="vegetarian" value="0" id="vegetarianNo">
+                            <label class="form-check-label" for="vegetarianNo">No</label>
+                        </div>
+                    </fieldset>
+                    <button type="submit" formaction="{{ url_for('update_guest_info') }}" class="btn btn-primary mb-2">Update Info</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
+

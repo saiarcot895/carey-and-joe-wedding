@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Flask, request, Response, g
+from flask import Flask, request, Response, g, render_template, url_for
 import sqlite3
 import json
 
@@ -35,7 +35,7 @@ def get_db():
 def str2bool(s):
     return str(s).lower() in ("true", "t", "y", "yes", "1")
 
-@app.route('/getInfo', methods=["POST"])
+@app.route("/getInfo", methods=["POST"])
 def get_guest_info():
     firstName = request.form["firstName"]
     lastName = request.form["lastName"]
@@ -59,10 +59,9 @@ def get_guest_info():
     returnData["presentForDay2"] = bool(int(row["PresentForDay2"]))
     c.close()
     response = Response(json.dumps(returnData), mimetype="application/json")
-    response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 
-@app.route('/updateInfo', methods=["POST"])
+@app.route("/updateInfo", methods=["POST"])
 def update_guest_info():
     firstName = request.form["firstName"]
     lastName = request.form["lastName"]
@@ -79,7 +78,6 @@ def update_guest_info():
                 lastName))
     returnData = {}
     response = Response(json.dumps(returnData), mimetype="application/json")
-    response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 
 @app.teardown_appcontext
@@ -94,8 +92,28 @@ def invalid_request(error):
     returnData["error"] = "Invalid request."
     response = Response(json.dumps(returnData), 400,
             mimetype="application/json")
-    response.headers["Access-Control-Allow-Origin"] = "*"
     return response
+
+@app.route("/")
+@app.route("/index.html")
+def index():
+    return render_template("index.html")
+
+@app.route("/details.html")
+def details():
+    return render_template("details.html")
+
+@app.route("/registry.html")
+def registry():
+    return render_template("registry.html")
+
+@app.route("/rsvp.html")
+def rsvp():
+    return render_template("rsvp.html")
+
+@app.route("/faq.html")
+def faq():
+    return render_template("faq.html")
 
 if __name__ == '__main__':
     app.run()
