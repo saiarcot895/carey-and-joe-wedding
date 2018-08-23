@@ -1,12 +1,19 @@
 #!/usr/bin/python3
 
-from flask import Flask, request, Response, g, render_template, url_for
+from flask import Flask, request, Response, g, render_template, url_for, redirect, flash, abort
+from flask_login import LoginManager, UserMixin, login_required, login_user
+from uritools import urisplit, urijoin
 import sqlite3
 import json
 
 app = Flask(__name__)
-
+app.secret_key = "Secret key, change later"
+login_manager = LoginManager()
+login_manager.login_view = "login"
 DATABASE = "/var/www/python/weddingWebsite.db"
+
+class User(UserMixin):
+    pass
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -35,7 +42,37 @@ def get_db():
 def str2bool(s):
     return str(s).lower() in ("true", "t", "y", "yes", "1")
 
+
+def is_safe_url(target):
+    ref_url = urisplit(request.host_url)
+    test_url = urisplit(urijoin(request.host_url, target))
+    return test_url.scheme in ('http', 'https') and \
+            ref_url.host == test_url.host
+
+@login_manager.user_loader
+def user_loader(access_code):
+    if access_code != "SAMPLE":
+        return None
+
+    user = User()
+    user.id = access_code
+    return user
+
+@login_manager.request_loader
+def request_loader(request):
+    access_code = request.form.get("accessCode")
+    if access_code is None:
+        return None
+    if access_code != "SAMPLE":
+        return None
+
+    user = User()
+    user.id = access_code
+    user.is_authenticated = True
+    return user
+
 @app.route("/getInfo", methods=["POST"])
+@login_required
 def get_guest_info():
     firstName = request.form["firstName"]
     lastName = request.form["lastName"]
@@ -62,6 +99,7 @@ def get_guest_info():
     return response
 
 @app.route("/updateInfo", methods=["POST"])
+@login_required
 def update_guest_info():
     firstName = request.form["firstName"]
     lastName = request.form["lastName"]
@@ -94,26 +132,51 @@ def invalid_request(error):
             mimetype="application/json")
     return response
 
+@app.route("/login.html", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+    else:
+        accessCode = request.form["accessCode"]
+        if accessCode == "SAMPLE":
+            user = User()
+            user.id = accessCode
+            login_user(user)
+            nextPage = request.args.get('next')
+            if nextPage and not is_safe_url(nextPage):
+                return abort(400)
+            return redirect(nextPage or url_for("index"))
+        else:
+            flash("Invalid access code.")
+            return render_template("login.html")
+
 @app.route("/")
 @app.route("/index.html")
+@login_required
 def index():
     return render_template("index.html")
 
 @app.route("/details.html")
+@login_required
 def details():
     return render_template("details.html")
 
 @app.route("/registry.html")
+@login_required
 def registry():
     return render_template("registry.html")
 
 @app.route("/rsvp.html")
+@login_required
 def rsvp():
     return render_template("rsvp.html")
 
 @app.route("/faq.html")
+@login_required
 def faq():
     return render_template("faq.html")
+
+login_manager.init_app(app)
 
 if __name__ == '__main__':
     app.run()
