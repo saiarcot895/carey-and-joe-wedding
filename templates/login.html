@@ -16,20 +16,22 @@
     </head>
 
     <body class="text-center d-flex align-items-center">
-        <form method="post" class="form-signin m-auto">
-			<h1 class="h3 mb-3">Please enter your access code</h1>
-			{% with messages = get_flashed_messages() %}
-				{% if messages %}
-					{% for message in messages %}
-						<div class="alert alert-danger" role="alert">
-							{{ message }}
-						</div>
-					{% endfor %}
-				{% endif %}
-			{% endwith %}
-			<label for="inputAccessCode" class="sr-only">Access code</label>
-            <input id="inputAccessCode" class="form-control p-2" placeholder="Access code" name="accessCode" required autofocus>
-            <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">Enter</button>
-        </form>
+        <div class="form-container m-auto p-2 rounded">
+            <form method="post" class="form-signin">
+                <h1 class="h3 mb-3">Please enter your access code</h1>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <label for="inputAccessCode" class="sr-only">Access code</label>
+                <input id="inputAccessCode" class="form-control p-2" placeholder="Access code" name="accessCode" required autofocus>
+                <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">Enter</button>
+            </form>
+        </div>
     </body>
 </html>
