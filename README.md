@@ -1,7 +1,9 @@
 # Prerequisites
 
 * Python 3
-* Flask (for Python 3)
+* Flask
+* Flask-login
+* uritools
 
 # Running the website
 
