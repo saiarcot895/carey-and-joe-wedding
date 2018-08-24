@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes|Open+Sans:400,600,700&subset=latin-ext');
+
 html {
     font-size: 1rem;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
 }
 
 @media (min-width: 768px) {
@@ -18,6 +24,10 @@ html {
     html {
         font-size: 1.2rem;
     }
+}
+
+.navbar {
+    font-family: 'Great Vibes', cursive;
 }
 
 div.container-fluid {
