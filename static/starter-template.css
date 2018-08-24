@@ -8,6 +8,12 @@ html {
     }
 }
 
+@media (min-width: 992px) {
+    .navbar-brand {
+        position: fixed;
+    }
+}
+
 @media (min-width: 1200px) {
     html {
         font-size: 1.2rem;
