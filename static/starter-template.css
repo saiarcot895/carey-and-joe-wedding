@@ -28,6 +28,7 @@ body {
 
 .navbar {
     font-family: 'Great Vibes', cursive;
+    background-image: linear-gradient(to bottom right, lightpink, lavender);
 }
 
 div.container-fluid {
