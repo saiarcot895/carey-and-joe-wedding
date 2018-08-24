@@ -12,6 +12,13 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
+div.container-fluid {
+    background-size: cover!important;
+    background-attachment: fixed!important;
+    min-height: 100vh;
+    padding-top: 75px;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 1.1rem;
@@ -20,11 +27,9 @@ body {
     .navbar {
         font-size: 1.3rem;
     }
-}
 
-@media (min-width: 992px) {
-    .navbar-brand {
-        position: fixed;
+    div.container-fluid {
+        padding-top: 90px;
     }
 }
 
@@ -36,6 +41,10 @@ body {
     .navbar {
         font-size: 1.4rem;
     }
+
+    div.container-fluid {
+        padding-top: 110px;
+    }
 }
 
 .navbar {
@@ -43,18 +52,6 @@ body {
     background-image: linear-gradient(to bottom right, lightpink, lavender);
 }
 
-div.container-fluid {
-    background-size: cover!important;
-    background-attachment: fixed!important;
-    min-height: 100vh;
-    padding-top: 56px;
-}
-
-div#usContainer > div {
-    margin: auto;
-}
-
 h2.text-center {
     font-family: 'Great Vibes', cursive;
-    padding-top: 56px;
 }
