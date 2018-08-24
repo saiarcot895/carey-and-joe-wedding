@@ -42,6 +42,7 @@ div#usContainer > div {
     margin: auto;
 }
 
-h2 {
+h2.text-center {
+    font-family: 'Great Vibes', cursive;
     padding-top: 56px;
 }
