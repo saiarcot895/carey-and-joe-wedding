@@ -1,16 +1,24 @@
-@import url('https://fonts.googleapis.com/css?family=Great+Vibes|Open+Sans:400,600,700&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes|Open+Sans+Condensed:300|Raleway:400,500,600,700&subset=latin-ext');
 
 html {
     font-size: 1rem;
 }
 
+.navbar {
+    font-size: 1.2rem;
+}
+
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 @media (min-width: 768px) {
     html {
         font-size: 1.1rem;
+    }
+
+    .navbar {
+        font-size: 1.3rem;
     }
 }
 
@@ -23,6 +31,10 @@ body {
 @media (min-width: 1200px) {
     html {
         font-size: 1.2rem;
+    }
+
+    .navbar {
+        font-size: 1.4rem;
     }
 }
 
