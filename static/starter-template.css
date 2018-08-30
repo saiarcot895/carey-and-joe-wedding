@@ -47,6 +47,12 @@ div.container-fluid {
     }
 }
 
+@media (max-width: 991px) {
+    .navbar * {
+        flex-basis: 30%;
+    }
+}
+
 .navbar {
     font-family: 'Great Vibes', cursive;
     background-image: linear-gradient(to bottom right, lightpink, lavender);
